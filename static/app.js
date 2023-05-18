@@ -1,10 +1,6 @@
-import { h, Component, render } from 'https://unpkg.com/preact?module';
-import htm from 'https://unpkg.com/htm?module';
+import { html, h, Component, render } from 'https://cdnjs.cloudflare.com/ajax/libs/htm/3.1.1/preact/standalone.module.min.js';
 
 const debug = (window.location.hash == '#debug');
-
-// Initialize htm with Preact
-const html = htm.bind(h);
 
 const QUESTION_DATA_URL = 'questions.json'
 const INITIAL_QUESTION_ID = 'Q1';
