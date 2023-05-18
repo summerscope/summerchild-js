@@ -174,7 +174,7 @@ class App extends Component {
         }
 
         return html`
-        <main key="body">${body}</main>
+        <main key="body">${body}<div class="push"></div></main>
         <footer key="footer">${footer}</footer>
         `
     }
@@ -189,6 +189,7 @@ class App extends Component {
         return html`
         <h4>${titleText}</h4>
         <p>${bodyText}</p>
+        <br />
         `
     }
 
@@ -204,10 +205,11 @@ class App extends Component {
         const [key, result] = this.getResultForScore(state, finalScore);
 
         return html`
-        <h2>${key}: ${result.title}</h2>
-        <p>Final Score: ${Math.round(finalScore)}</p>
-        <p>${result.text}</p>
-        <h3>Recommendations:</h3>
+        <h1><span class="large">${Math.round(finalScore)}</span><br /> Your Final Score</h1>
+        <h4>${result.title} [${result.range}]</h4><br />
+        <blockquote>${result.text}</blockquote>
+        <br /><br />
+        <h2>Recommendations:</h2>
         <ul>
             ${state.recommendations.map(text => html`
                 <li>${this.renderRecommendation(text)}</li>
@@ -235,15 +237,15 @@ class App extends Component {
 
         return html`
         <${Question} question=${question} onAnswer=${onAnswer} />
-        <p>
-            current score: ${state.score}
+        <div class="debug">
+            multiplier: ${state.multiplier}
             <br/>
-            current multiplier: ${state.multiplier}
+            accumulated points: ${state.score}
             <br/>
-            max remaining: ${remaining}
+            questions left: ${remaining}
             <br/>
-            complete percentage: ${percentage}%
-        </p>
+            percentage complete: ${percentage}%
+        </div>
         `;
     }
 }
@@ -253,11 +255,11 @@ function Question(props) {
     const [titleText, bodyText] = splitFirstLine(question.text);
 
     return html`
-    <h4>${titleText}</h4>
+    <h1>${titleText}</h1>
     <p>${bodyText}</p>
     <ul>
         ${Object.entries(question.answers).map(([key, answer]) => html`
-            <li><a href="#" onClick=${e => props.onAnswer(e, answer)}>${key}: ${answer.text}</a></li>
+            <li><a href="#" onClick=${e => props.onAnswer(e, answer)}>${answer.text}</a></li>
         `)}
     </ul>
     `
