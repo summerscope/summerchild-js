@@ -382,7 +382,7 @@
     "answers": {
       "A": {
         "text": "Mandatory",
-        "score": 4,
+        "score": 8,
         "recommendation": "",
         "nextq": "Q18"
       },
