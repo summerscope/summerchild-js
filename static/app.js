@@ -57,6 +57,7 @@ class App extends Component {
 
         this.state = {
             isLoading: true,
+            loadError: false,
             questions: [],
             results: null,
             currentQuestion: INITIAL_QUESTION_ID,
@@ -71,8 +72,16 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        // TODO: handle fetch errors
         const response = await fetch(QUESTION_DATA_URL);
+
+        if (!response.ok) {
+            this.setState({
+                isLoading: false,
+                loadError: true
+            })
+            return
+        }
+
         const json = await response.json();
         const questions = new Map(json.map(q => [q.id, q]));
         const results = questions.get('Results').results;
@@ -156,6 +165,10 @@ class App extends Component {
             return this.renderLoading();
         }
 
+        if (state.loadError) {
+            return this.renderError();
+        }
+
         let body;
 
         if (state.quizFinished) {
@@ -181,6 +194,10 @@ class App extends Component {
 
     renderLoading() {
         return html`<p>Loading...</p>`;
+    }
+
+    renderError() {
+        return html`<p>Error!</p>`;
     }
 
     renderRecommendation(text) {
