@@ -52,8 +52,8 @@ class App extends Component {
         super(props);
 
         this.state = {
-            isLoading: true,
-            loadError: false,
+            loading: true,
+            error: false,
             questions: [],
             results: null,
             currentQuestion: INITIAL_QUESTION_ID,
@@ -72,8 +72,8 @@ class App extends Component {
 
         if (!response.ok) {
             this.setState({
-                isLoading: false,
-                loadError: true
+                loading: false,
+                error: true
             })
             return
         }
@@ -83,7 +83,7 @@ class App extends Component {
         const results = questions.get('Results').results;
 
         this.setState({
-            isLoading: false,
+            loading: false,
             questions: questions,
             results: results
         })
@@ -131,8 +131,8 @@ class App extends Component {
         });
     }
 
-    onStartOver = (e) => {
-        e.preventDefault();
+    onStartOver = (event) => {
+        event.preventDefault();
         this.saveState({
             currentQuestion: INITIAL_QUESTION_ID,
             quizFinished: false,
@@ -142,8 +142,8 @@ class App extends Component {
         });
     }
 
-    onJumpToEnd = (e) => {
-        e.preventDefault();
+    onDebugJumpToEnd = (event) => {
+        event.preventDefault();
         this.saveState({
             currentQuestion: undefined,
             quizFinished: true,
@@ -156,18 +156,29 @@ class App extends Component {
         });
     }
 
+    onDebugLoadingState = (event) => {
+        event.preventDefault();
+        this.setState({
+            loading: true
+        });
+    }
+
+    onDebugErrorState = (e) => {
+        e.preventDefault();
+        this.setState({
+            loading: false,
+            error: true
+        });
+    }
+
     render(props, state) {
-        if (state.isLoading) {
-            return this.renderLoading();
-        }
-
-        if (state.loadError) {
-            return this.renderError();
-        }
-
         let body;
 
-        if (state.quizFinished) {
+        if (state.loading) {
+            body = this.renderLoading();
+        } else if (state.error) {
+            body = this.renderError();
+        } else if (state.quizFinished) {
             body = this.renderQuizFinished(state);
         } else {
             body = this.renderCurrentQuestion(state);
@@ -178,7 +189,9 @@ class App extends Component {
         if (debug) {
             footer = html`
             ${footer}<br/>
-            <a href="#" onClick=${this.onJumpToEnd}>Jump to End (Debug)</a>
+            <a href="#" onClick=${this.onDebugJumpToEnd}>Jump to End (Debug)</a>
+            <a href="#" onClick=${this.onDebugLoadingState}>Show Loading State (Debug)</a>
+            <a href="#" onClick=${this.onDebugErrorState}>Show Error State (Debug)</a>
             `
         }
 
@@ -193,7 +206,7 @@ class App extends Component {
     }
 
     renderError() {
-        return html`<p>Error!</p>`;
+        return html`<p>Load Error!</p>`;
     }
 
     renderRecommendation(text) {
