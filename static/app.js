@@ -144,6 +144,10 @@ class App extends Component {
 
     onDebugJumpToEnd = (event) => {
         event.preventDefault();
+        this.setState({
+            loading: false,
+            error: false
+        })
         this.saveState({
             currentQuestion: undefined,
             quizFinished: true,
@@ -159,7 +163,8 @@ class App extends Component {
     onDebugLoadingState = (event) => {
         event.preventDefault();
         this.setState({
-            loading: true
+            loading: true,
+            error: false
         });
     }
 
