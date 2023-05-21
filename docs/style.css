@@ -54,6 +54,8 @@ main p, main a, footer a {
 main, footer, header {
   max-width: 24em;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 pre {
@@ -122,4 +124,11 @@ blockquote {
   padding: 10px 1em;
   border-radius: 10px;
   margin-bottom: 5px;
+}
+
+@media (min-width:600px) {
+  main, footer, header {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
