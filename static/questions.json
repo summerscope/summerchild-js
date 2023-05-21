@@ -114,7 +114,7 @@
   },
   {
     "id": "Q5",
-    "text": "Is your target cohort economically vulnerable?\nLook at average earning rates of your country if you aren't sure where your demographic sits overall.",
+    "text": "Is your target cohort economically vulnerable?\nLook at the average earning rates of the relevant country or region for a baseline reference.",
     "answers": {
       "A": {
         "text": "Top 10% of earners",
