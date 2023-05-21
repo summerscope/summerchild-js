@@ -211,6 +211,7 @@ class App extends Component {
     if (debug) {
       footer = html`
         ${footer}<br />
+        <pre>Current score ${this.state.score}</pre>
         <a href="#" onClick=${this.onDebugJumpToEnd}>Jump to End (Debug)</a>
         <a href="#" onClick=${this.onDebugLoadingState}
           >Show Loading State (Debug)</a

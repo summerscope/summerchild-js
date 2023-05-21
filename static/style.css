@@ -39,7 +39,7 @@ h1 {
 }
 
 h4 {
-  font-size: 1em;
+  font-size: 1.125em;
   margin-bottom: 0;
 }
 
@@ -56,8 +56,13 @@ main, footer, header {
   margin: 0 auto;
 }
 
+pre {
+  font-family: 'courier', monospace;
+  text-align: center;
+}
+
 footer {
-  height: 80px;
+ padding-bottom: 40px;
 }
 
 main ul {
