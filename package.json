@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve": "sirv static --dev --port 8080"
+    "serve": "sirv docs --dev --port 8080"
   },
   "devDependencies": {
     "sirv-cli": ">=1.0"
