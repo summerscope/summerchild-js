@@ -199,7 +199,9 @@ class App extends Component {
     }
 
     let header = html`<div class="logo">
-      <img src="grumpy.png" /><span>sweet summer child score</span>
+      <img src="grumpy.png" aria-hidden="true" /><span
+        >sweet summer child score</span
+      >
     </div>`;
 
     let footer = html`<a href="#" class="restart" onClick=${this.onStartOver}
@@ -220,7 +222,7 @@ class App extends Component {
     }
 
     return html`
-      <header key="footer">${header}</header>
+      <header key="header">${header}</header>
       <main key="body">${body}</main>
       <footer key="footer">${footer}</footer>
     `;
